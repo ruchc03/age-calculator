@@ -1,0 +1,41 @@
+/* Add your styling rules here */
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+#date-picker-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+#datePicker {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#calculate-btn {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+#words-output {
+    font-size: 16px;
+    line-height: 1.5;
+}
