@@ -29,6 +29,10 @@
         const today = new Date();
         const age = getDetailedAge(birthdate, today);
 
+        const totalSeconds = age.years * 365 * 24 * 60 * 60 + age.months * 30 * 24 * 60 * 60 + age.days * 24 * 60 * 60 + age.hours * 60 * 60 + age.minutes * 60 + age.seconds;
+        const totalMinutes = totalSeconds / 60;
+        const totalHours = totalMinutes / 60;
+
         document.getElementById('words-output').innerHTML = `
           Your Exact Age :<br>
           = ${age.years} years ${age.months} months ${age.days} days ${age.hours} hours ${age.minutes} minutes ${age.seconds} seconds<br>
@@ -40,9 +44,9 @@
           ≈ ${age.months * 12 + age.years} months ${age.days} days ${age.hours} hours ${age.minutes} minutes ${age.seconds} seconds<br>
           ≈ ${addCommas(Math.floor(age.totalDays / 7))} weeks ${age.totalDays % 7} days ${age.hours} hours ${age.minutes} minutes ${age.seconds} seconds<br>
           ≈ ${addCommas(age.totalDays)} days ${age.hours} hours ${age.minutes} minutes ${age.seconds} seconds<br>
-          ≈ ${addCommas(age.hours * 24 + age.minutes * 60 + age.seconds)} hours ${addCommas(age.minutes * 60 + age.seconds)} minutes ${addCommas(age.seconds)} seconds<br>
-          ≈ ${addCommas(age.minutes * 60 + age.seconds)} seconds<br>
-          ≈ ${addCommas(age.seconds)} seconds
+          ≈ ${addCommas(Math.floor(totalHours))} hours ${addCommas(Math.floor(totalMinutes % 60))} minutes ${addCommas(Math.floor(totalSeconds % 60))} seconds<br>
+          ≈ ${addCommas(Math.floor(totalMinutes))} minutes ${addCommas(Math.floor(totalSeconds % 60))} seconds<br>
+          ≈ ${addCommas(Math.floor(totalSeconds))} seconds
         `;
     }
 
