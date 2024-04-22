@@ -1,6 +1,5 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
     let intervalId; // Variable to store the interval ID for updating the age
-
     const picker = flatpickr("#datePicker", {
         dateFormat: "Y-m-d",
         maxDate: new Date().toISOString().split("T")[0]  // Set maximum date as today
@@ -32,9 +31,10 @@
 
         document.getElementById('words-output').innerHTML = `
           Your Exact Age :<br>
-          = ${age.years} years ${age.months} months ${age.days} days<br>
-          = ${age.months * 12 + age.years} months ${age.days} days<br>
-          = ${age.totalDays} days<br>
+          = ${age.years} years ${age.months} months ${age.days} days ${age.hours} hours ${age.seconds} seconds<br>
+          = ${age.months * 12 + age.years} months ${age.days} days ${age.hours} hours ${age.minutes} minutes ${age.seconds} seconds<br>
+          = ${Math.floor(age.totalDays / 7)} weeks ${age.totalDays % 7} days ${age.hours} hours ${age.minutes} minutes ${age.seconds} seconds<br>
+          = ${age.totalDays} days ${age.hours} hours ${age.minutes} minutes ${age.seconds} seconds<br>
           <br>
           ≈ ${age.hours} hours ${age.minutes} minutes ${age.seconds} seconds<br>
           ≈ ${age.minutes * 60 + age.seconds} seconds<br>
