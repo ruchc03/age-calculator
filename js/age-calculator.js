@@ -35,15 +35,10 @@
 
         document.getElementById('words-output').innerHTML = `
           Your Exact Age :<br>
-          = ${age.years} years ${age.months} months ${age.days} days ${age.hours} hours ${age.minutes} minutes ${age.seconds} seconds<br>
-          = ${age.months * 12 + age.years} months ${age.days} days ${age.hours} hours ${age.minutes} minutes ${age.seconds} seconds<br>
-          = ${Math.floor(age.totalDays / 7)} weeks ${age.totalDays % 7} days ${age.hours} hours ${age.minutes} minutes ${age.seconds} seconds<br>
-          = ${age.totalDays} days ${age.hours} hours ${age.minutes} minutes ${age.seconds} seconds<br>
-          <br>
           ≈ ${age.years} years ${age.months} months ${age.days} days ${age.hours} hours ${age.minutes} minutes ${age.seconds} seconds<br>
           ≈ ${age.months * 12 + age.years} months ${age.days} days ${age.hours} hours ${age.minutes} minutes ${age.seconds} seconds<br>
-          ≈ ${addCommas(Math.floor(age.totalDays / 7))} weeks ${age.totalDays % 7} days ${age.hours} hours ${age.minutes} minutes ${age.seconds} seconds<br>
-          ≈ ${addCommas(age.totalDays)} days ${age.hours} hours ${age.minutes} minutes ${age.seconds} seconds<br>
+          ≈ ${Math.floor(age.totalDays / 7)} weeks ${age.totalDays % 7} days ${age.hours} hours ${age.minutes} minutes ${age.seconds} seconds<br>
+          ≈ ${age.totalDays} days ${age.hours} hours ${age.minutes} minutes ${age.seconds} seconds<br>
           ≈ ${addCommas(Math.floor(totalHours))} hours ${addCommas(Math.floor(totalMinutes % 60))} minutes ${addCommas(Math.floor(totalSeconds % 60))} seconds<br>
           ≈ ${addCommas(Math.floor(totalMinutes))} minutes ${addCommas(Math.floor(totalSeconds % 60))} seconds<br>
           ≈ ${addCommas(Math.floor(totalSeconds))} seconds
