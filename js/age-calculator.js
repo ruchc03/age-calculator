@@ -20,32 +20,47 @@
 
         document.getElementById('words-output').innerHTML = `
           Your Exact Age :<br>
-          = ${age.years} years ${age.months} months ${age.days} days<br>
-          = ${age.totalMonths} months ${age.days} days<br>
-          = ${age.weeks} weeks and ${age.weekDays} days<br>
-          = ${age.totalDays} days<br>
+          = ${age.years} years ${age.months} months ${age.days} days ${age.hours} hours ${age.seconds} seconds<br>
+          = ${age.months * 12 + age.years} months ${age.days} days ${age.hours} hours ${age.minutes} minutes ${age.seconds} seconds<br>
+          = ${Math.floor(age.totalDays / 7)} weeks ${age.totalDays % 7} days ${age.hours} hours ${age.minutes} minutes ${age.seconds} seconds<br>
+          = ${age.totalDays} days ${age.hours} hours ${age.minutes} minutes ${age.seconds} seconds<br>
           <br>
-          ≈ ${age.hours} hours<br>
-          ≈ ${age.minutes} minutes<br>
+          ≈ ${age.hours} hours ${age.minutes} minutes ${age.seconds} seconds<br>
+          ≈ ${age.minutes * 60 + age.seconds} seconds<br>
           ≈ ${age.seconds} seconds
       `;
     });
 });
 
 function getDetailedAge(birthdate, today) {
-    let years = today.getFullYear() - birthdate.getFullYear();
-    let months = today.getMonth() - birthdate.getMonth();
-    let days = today.getDate() - birthdate.getDate();
+    const diffTime = today.getTime() - birthdate.getTime();
+    const diffSeconds = Math.floor(diffTime / 1000);
+    const diffMinutes = Math.floor(diffSeconds / 60);
+    const diffHours = Math.floor(diffMinutes / 60);
+    const diffDays = Math.floor(diffHours / 24);
+    const years = Math.floor(diffDays / 365);
+    const months = Math.floor((diffDays % 365) / 30);
+    const weeks = Math.floor(((diffDays % 365) % 30) / 7);
+    const days = ((diffDays % 365) % 30) % 7;
+    const hours = diffHours % 24;
+    const minutes = diffMinutes % 60;
+    const seconds = diffSeconds % 60;
 
-    if (days < 0) {
-        months--;
-        let previousMonth = new Date(today.getFullYear(), today.getMonth(), 0);
-        days += previousMonth.getDate();
-    }
+    return {
+        years: years,
+        months: months,
+        weeks: weeks,
+        days: days,
+        totalDays: diffDays,
+        hours: hours,
+        minutes: minutes,
+        seconds: seconds
+    };
+}
 
-    if (months < 0) {
-        years--;
-        months += 12;
-    }
-
-    const totalDays = Math.floor((today -
+// Add this function to check for leap year
+Date.prototype.leapYear = function () {
+    // Logic to determine leap year
+    const year = this.getFullYear();
+    return ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0);
+};
