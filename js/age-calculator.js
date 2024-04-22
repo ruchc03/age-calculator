@@ -1,8 +1,7 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
-    const picker = new Pikaday({
-        field: document.getElementById('datePicker'),
-        format: 'YYYY-MM-DD',
-        yearRange: [1900, new Date().getFullYear()]
+    flatpickr("#datePicker", {
+        dateFormat: "Y-m-d",
+        maxDate: new Date().toISOString().split("T")[0]  // Set maximum date as today
     });
 
     document.getElementById('calculate-btn').addEventListener('click', function (event) {
@@ -30,37 +29,30 @@
           ≈ ${age.seconds} seconds
       `;
     });
+
+    function getDetailedAge(birthdate, today) {
+        const diffTime = today.getTime() - birthdate.getTime();
+        const diffSeconds = Math.floor(diffTime / 1000);
+        const diffMinutes = Math.floor(diffSeconds / 60);
+        const diffHours = Math.floor(diffMinutes / 60);
+        const diffDays = Math.floor(diffHours / 24);
+        const years = Math.floor(diffDays / 365);
+        const months = Math.floor((diffDays % 365) / 30);
+        const weeks = Math.floor(((diffDays % 365) % 30) / 7);
+        const days = ((diffDays % 365) % 30) % 7;
+        const hours = diffHours % 24;
+        const minutes = diffMinutes % 60;
+        const seconds = diffSeconds % 60;
+
+        return {
+            years: years,
+            months: months,
+            weeks: weeks,
+            days: days,
+            totalDays: diffDays,
+            hours: hours,
+            minutes: minutes,
+            seconds: seconds
+        };
+    }
 });
-
-function getDetailedAge(birthdate, today) {
-    const diffTime = today.getTime() - birthdate.getTime();
-    const diffSeconds = Math.floor(diffTime / 1000);
-    const diffMinutes = Math.floor(diffSeconds / 60);
-    const diffHours = Math.floor(diffMinutes / 60);
-    const diffDays = Math.floor(diffHours / 24);
-    const years = Math.floor(diffDays / 365);
-    const months = Math.floor((diffDays % 365) / 30);
-    const weeks = Math.floor(((diffDays % 365) % 30) / 7);
-    const days = ((diffDays % 365) % 30) % 7;
-    const hours = diffHours % 24;
-    const minutes = diffMinutes % 60;
-    const seconds = diffSeconds % 60;
-
-    return {
-        years: years,
-        months: months,
-        weeks: weeks,
-        days: days,
-        totalDays: diffDays,
-        hours: hours,
-        minutes: minutes,
-        seconds: seconds
-    };
-}
-
-// Add this function to check for leap year
-Date.prototype.leapYear = function () {
-    // Logic to determine leap year
-    const year = this.getFullYear();
-    return ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0);
-};
